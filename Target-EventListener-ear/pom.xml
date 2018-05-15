@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.opentext.dmg.target.eventlistener</groupId>
+    <artifactId>Target-EventListener</artifactId>
+    <version>1.0.29</version>
+  </parent>
+  <artifactId>Target-EventListener-ear</artifactId>
+  <name>Target-EventListener-ear</name>
+  <packaging>ear</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>com.opentext.dmg.target.eventlistener</groupId>
+			<artifactId>Target-EventListener-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>com.opentext.dmg.target.eventlistener</groupId>
+			<artifactId>Target-EventListener-war</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+		</dependency> 
+		<dependency>
+			<groupId>com.opentext.dmg.target.eventlistener</groupId>
+			<artifactId>Target-EventListener-sar</artifactId>
+			<version>${project.version}</version>
+			<type>sar</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>${version.ear.plugin}</version>
+				<configuration>
+					<!-- Tell Maven we are using Java EE 6 -->
+					<version>6</version>
+					<!-- Use Java EE ear libraries as needed. Java EE ear libraries
+                        are in easy way to package any libraries needed in the ear, and automatically
+                        have any modules (EJB-JARs and WARs) use them -->
+					<defaultLibBundleDir>lib/</defaultLibBundleDir>
+					<skinnyWars>true</skinnyWars>
+					<!--<packagingExcludes>lib/*.jar</packagingExcludes>-->
+					<finalName>Target-EventListener-ear</finalName>
+					<modules>
+						<ejbModule>
+							<groupId>com.opentext.dmg.target.eventlistener</groupId>
+							<artifactId>Target-EventListener-ejb</artifactId>
+							<bundleFileName>Target-EventListener-ejb.jar</bundleFileName>
+						</ejbModule>
+						<webModule>
+							<groupId>com.opentext.dmg.target.eventlistener</groupId>
+							<artifactId>Target-EventListener-war</artifactId>
+							<bundleFileName>Target-EventListener-war.war</bundleFileName>
+						</webModule>
+						<sarModule>
+							<groupId>com.opentext.dmg.target.eventlistener</groupId>
+							<artifactId>Target-EventListener-sar</artifactId>
+							<bundleFileName>Target-EventListener-sar.sar</bundleFileName>
+						</sarModule>						
+					</modules>
+				</configuration>
+			</plugin>
+			<!-- JBoss AS plugin to deploy ear -->
+			<plugin>
+				<groupId>org.jboss.as.plugins</groupId>
+				<artifactId>jboss-as-maven-plugin</artifactId>
+				<version>${version.jboss.maven.plugin}</version>
+				<configuration>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.opentext.dmg.target.eventlistener</groupId>
+        <artifactId>Target-EventListener</artifactId>
+        <version>1.0.29</version>
+    </parent>
+    <artifactId>Target-EventListener-sar</artifactId>
+    <packaging>jboss-sar</packaging>
+    <name>Target-EventListener-sar</name>
+    <dependencies>
+        <dependency>
+            <groupId>com.opentext.dmg.target.eventlistener</groupId>
+            <artifactId>Target-EventListener-ejb</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jboss-packaging-maven-plugin</artifactId>
+                <version>${version.jboss.packaging.plugin}</version>
+                <!-- Enable packaging types and lifecycle bindings. -->
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.maven.plugin}</version>
+                <configuration>
+                    <skip>false</skip>
+                    <filename>${project.artifactId}.sar</filename>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

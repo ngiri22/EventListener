@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<server>
+	<mbean code="org.jboss.jms.server.destination.QueueService"	name="jboss.messaging.destination:service=Queue,name=target-events-notification-process-queue"
+		xmbean-dd="xmdesc/Queue-xmbean.xml">
+		<attribute name="JNDIName">jms/artesia/target-events-notification-process-queue</attribute>
+		<attribute name="RedeliveryDelay">1000</attribute>
+		<attribute name="MaxDeliveryAttempts">1</attribute>
+		<depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+		<depends>jboss.messaging:service=PostOffice</depends>
+	</mbean>
+
+	<mbean code="org.jboss.jms.server.destination.QueueService"	name="jboss.messaging.destination:service=Queue,name=target-events-notification-process-error-queue"
+		xmbean-dd="xmdesc/Queue-xmbean.xml">
+		<attribute name="JNDIName">jms/artesia/target-events-notification-process-error-queue</attribute>
+		<depends optional-attribute-name="ServerPeer">jboss.messaging:service=ServerPeer</depends>
+		<depends>jboss.messaging:service=PostOffice</depends>
+		<attribute name="Clustered">true</attribute>
+	</mbean>
+</server>
